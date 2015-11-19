@@ -2,7 +2,6 @@
 
 The utility is created to generate a visual report from Stylecopviolation.xml file.
 
-+++++++++++++
 Version 1.0
 
 - To generate the report customize the arguments in ReportBuilder.bat or use StylcopReportGen.exe with proper arguments.
