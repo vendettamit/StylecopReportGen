@@ -1,0 +1,1576 @@
+<div xmlns:xp="http://www.xmlprime.com/" xmlns:ext="urn:extensions" id="stylecop-report"><script language="javascript">
+        function toggle (name, img)
+        {
+        var element = document.getElementById (name);
+
+        if (element.style.display == 'none')
+        element.style.display = '';
+        else
+        element.style.display = 'none';
+
+        var img_element = document.getElementById (img);
+
+        if (img_element.alt.indexOf ('minus.png') >= 0){
+	img_element.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC';
+	img_element.alt='plus.png';
+        }
+	else{
+        img_element.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFRJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAUDgAAYTCAQggCAeigQEggFBkAAIIhQMQQCgcgABCsQcggFBcABBAKByAAELhAAQQCgcgwAA1kACQrCOu2AAAAABJRU5ErkJggg==';
+	img_element.alt='minus.png';
+	}
+        }
+      </script>
+  <style type="text/css">
+        #stylecop-report
+        {
+        font-family: Arial, Helvetica, sans-serif;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 0;
+        }
+
+        #stylecop-report .header
+        {
+        background-color: #566077;
+        background-repeat: repeat-x;
+        color: #fff;
+        font-weight: bolder;
+        height: 50px;
+        vertical-align: middle;
+        }
+
+        #stylecop-report .headertext
+        {
+        height: 35px;
+        margin-left: 15px;
+        padding-top: 15px;
+        width: auto;
+        }
+
+        #stylecop-report .wrapper
+        {
+        padding-left: 20px;
+        padding-right: 20px;
+        width: auto;
+        }
+
+        #stylecop-report .legend
+        {
+        background-color: #ffc;
+        border: #d7ce28 1px solid;
+        font-size: small;
+        margin-top: 15px;
+        padding: 5px;
+        vertical-align: middle;
+        width: inherit;
+        }
+
+        #stylecop-report .clickablerow
+        {
+        cursor: pointer;
+        }
+
+        #stylecop-report .tabletotal
+        {
+        border-top: 1px #000;
+        font-weight: 700;
+        }
+
+        #stylecop-report .results-table
+        {
+        border-collapse: collapse;
+        font-size: 12px;
+        margin-top: 20px;
+        text-align: left;
+        width: 100%;
+        }
+
+        #stylecop-report .results-table th
+        {
+        background: #b9c9fe;
+        border-bottom: 1px solid #fff;
+        border-top: 4px solid #aabcfe;
+        color: #039;
+        font-size: 13px;
+        font-weight: 400;
+        padding: 8px;
+        }
+
+        #stylecop-report .results-table td
+        {
+        background: #e8edff;
+        border-bottom: 1px solid #fff;
+        border-top: 1px solid transparent;
+        color: #669;
+        padding: 5px;
+        }
+
+        #stylecop-report .errorlist td
+        {
+        background: #FFF;
+        border-bottom: 0;
+        border-top: 0 solid transparent;
+        color: #000;
+        padding: 0;
+        }
+
+        #stylecop-report .inner-results
+        {
+        border-collapse: collapse;
+        font-size: 12px;
+        margin-bottom: 3px;
+        margin-top: 4px;
+        text-align: left;
+        /*width: 100%;*/
+        width: auto;
+        }
+
+        #stylecop-report .inner-results td
+        {
+        background: #FFF;
+        border-bottom: 1px solid #fff;
+        border-top: 1px solid transparent;
+        color: #669;
+        padding: 3px;
+        }
+
+        .summaryline-Item
+        {
+        padding:10px;
+
+        }
+        .center{
+        text-align:center;
+        }
+        
+        .left{
+        text-align:left
+        }
+
+        #stylecop-report .inner-header th
+        {
+        background: #b9c9fe;
+        color: #039;
+        }
+
+        #stylecop-report .inner-rule-description
+        {
+        background-color: transparent;
+        border-collapse: collapse;
+        border: 0px;
+        font-size: 12px;
+        margin-bottom: 3px;
+        margin-top: 4px;
+        text-align: left;
+        width: 100%;
+        }
+
+        #stylecop-report .inner-rule-description tr
+        {
+        background-color: transparent;
+        border: 0px;
+        }
+
+        #stylecop-report .inner-rule-description td
+        {
+        background-color: transparent;
+        border: 0px;
+        }
+      </style>
+  <div class="header">
+    <div class="headertext"><b>Your project Name</b> / StlyeCop 4.7.49: Code Analysis Report
+      <div style="float:right" class="summaryline-Item"><small><i>
+                Dated:
+                11/19/2015 at 10:32:34</i></small></div></div>
+  </div>
+  <div class="wrapper"></div>
+  <div class="wrapper">
+    <div class="legend">
+      <div>
+            Total Violations: <b>35</b><br><div class="results-table">
+              Summary (By Categories):
+              <table cellpadding="2" cellspacing="0" width="100%" class="inner-results"><thead><tr class="inner-header"><th scope="col" class="left">Category</th><th scope="col">Violations</th></tr></thead><tbody><tr><td class="summaryline-Item"><b><i>DocumentationRules</i></b></td><td class="summaryline-Item center"><b>31</b></td></tr><tr><td class="summaryline-Item"><b><i>LayoutRules</i></b></td><td class="summaryline-Item center"><b>1</b></td></tr><tr><td class="summaryline-Item"><b><i>NamingRules</i></b></td><td class="summaryline-Item center"><b>3</b></td></tr></tbody></table><br>
+              Summary (By Rules):
+              <table cellpadding="2" cellspacing="0" width="100%" class="inner-results"><thead><tr class="inner-header"><th scope="col">RuleId</th><th scope="col">Description</th><th scope="col">Violations</th></tr></thead><tbody><tr><td class="summaryline-Item center"><b>SA1600</b></td><td class="summaryline-Item"><i>ElementsMustBeDocumented</i></td><td class="summaryline-Item center"><b>31</b></td></tr><tr><td class="summaryline-Item center"><b>SA1516</b></td><td class="summaryline-Item"><i>ElementsMustBeSeparatedByBlankLine</i></td><td class="summaryline-Item center"><b>1</b></td></tr><tr><td class="summaryline-Item center"><b>SA1300</b></td><td class="summaryline-Item"><i>ElementMustBeginWithUpperCaseLetter</i></td><td class="summaryline-Item center"><b>3</b></td></tr></tbody></table></div></div>
+    </div>
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+          <th scope="col">Source File</th>
+          <th scope="col">Violations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="clickablerow" onclick="toggle('E34E0R0D1', 'img-E34E0R0D1')">
+          <td style="width: 10px"><img id="img-E34E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+          </td>
+          <td style="width: 16px"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJPSURBVDjLpZPLS5RhFMYfv9QJlelTQZwRb2OKlKuINuHGLlBEBEOLxAu46oL0F0QQFdWizUCrWnjBaDHgThCMoiKkhUONTqmjmDp2GZ0UnWbmfc/ztrC+GbM2dXbv4ZzfeQ7vefKMMfifyP89IbevNNCYdkN2kawkCZKfSPZTOGTf6Y/m1uflKlC3LvsNTWArr9BT2LAf+W73dn5jHclIBFZyfYWU3or7T4K7AJmbl/yG7EtX1BQXNTVCYgtgbAEAYHlqYHlrsTEVQWr63RZFuqsfDAcdQPrGRR/JF5nKGm9xUxMyr0YBAEXXHgIANq/3ADQobD2J9fAkNiMTMSFb9z8ambMAQER3JC1XttkYGGZXoyZEGyTHRuBuPgBTUu7VSnUAgAUAWutOV2MjZGkehgYUA6O5A0AlkAyRnotiX3MLlFKduYCqAtuGXpyH0XQmOj+TIURt51OzURTYZdBKV2UBSsOIcRp/TVTT4ewK6idECAihtUKOArWcjq/B8tQ6UkUR31+OYXP4sTOdisivrkMyHodWejlXwcC38Fvs8dY5xaIId89VlJy7ACpCNCFCuOp8+BJ6A631gANQSg1mVmOxxGQYRW2nHMha4B5WA3chsv22T5/B13AIicWZmNZ6cMchTXUe81Okzz54pLi0uQWp+TmkZqMwxsBV74Or3od4OISPr0e3SHa3PX0f3HXKofNH/UIG9pZ5PeUth+CyS2EMkEqs4fPEOBJLsyske48/+xD8oxcAYPzs4QaS7RR2kbLTTOTQieczfzfTv8QPldGvTGoF6/8AAAAASUVORK5CYII=" alt="error.png">
+          </td>
+          <td>C:\Workspaces\Development_Phase1\MAIN\Source\Diagnostics.ReportingWeb\Diagnostics.ReportingWeb.ApplicationServices\Diagnostics.ReportingWeb.ApplicationServices.Common\Configuration\AppSetting.cs</td>
+          <td>11</td>
+        </tr>
+        <tr id="E34E0R0D1" class="errorlist" style="display: none">
+          <td></td>
+          <td colspan="6">
+            <table cellpadding="2" cellspacing="0" width="100%" class="inner-results">
+              <thead>
+                <tr class="inner-header">
+                  <th scope="col"></th>
+                  <th scope="col">Line</th>
+                  <th scope="col">Violation Message</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="clickablerow" onclick="toggle('E34E0R0D1-E34E0R0D1', 'img-E34E0R0D1-E34E0R0D1')">
+                  <td style="width: 10px"><img id="img-E34E0R0D1-E34E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>16</td>
+                  <td>The class must have a documentation header.</td>
+                </tr>
+                <tr id="E34E0R0D1-E34E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.AppSetting</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E34E0R0D1-E33E0R0D1', 'img-E34E0R0D1-E33E0R0D1')">
+                  <td style="width: 10px"><img id="img-E34E0R0D1-E33E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>19</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E34E0R0D1-E33E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.AppSetting.TemporalChekWebPayURL</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E34E0R0D1-E32E0R0D1', 'img-E34E0R0D1-E32E0R0D1')">
+                  <td style="width: 10px"><img id="img-E34E0R0D1-E32E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>20</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E34E0R0D1-E32E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.AppSetting.TemporalChekWebPayEnvironment</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E34E0R0D1-E31E0R0D1', 'img-E34E0R0D1-E31E0R0D1')">
+                  <td style="width: 10px"><img id="img-E34E0R0D1-E31E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>25</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E34E0R0D1-E31E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.AppSetting.GeoCodeEndpoint</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E34E0R0D1-E30E0R0D1', 'img-E34E0R0D1-E30E0R0D1')">
+                  <td style="width: 10px"><img id="img-E34E0R0D1-E30E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>31</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E34E0R0D1-E30E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.AppSetting.PitneyBowesAddressEndpoint</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E34E0R0D1-E29E0R0D1', 'img-E34E0R0D1-E29E0R0D1')">
+                  <td style="width: 10px"><img id="img-E34E0R0D1-E29E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>37</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E34E0R0D1-E29E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.AppSetting.OVSServiceURL</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E34E0R0D1-E28E0R0D1', 'img-E34E0R0D1-E28E0R0D1')">
+                  <td style="width: 10px"><img id="img-E34E0R0D1-E28E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>39</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E34E0R0D1-E28E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.AppSetting.OVSWaitTimeMilliseconds</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E34E0R0D1-E27E0R0D1', 'img-E34E0R0D1-E27E0R0D1')">
+                  <td style="width: 10px"><img id="img-E34E0R0D1-E27E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>41</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E34E0R0D1-E27E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.AppSetting.OVSReportingRecordTable</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E34E0R0D1-E26E0R0D1', 'img-E34E0R0D1-E26E0R0D1')">
+                  <td style="width: 10px"><img id="img-E34E0R0D1-E26E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>46</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E34E0R0D1-E26E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.AppSetting.CDCVIewServiceURL</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E34E0R0D1-E25E0R0D1', 'img-E34E0R0D1-E25E0R0D1')">
+                  <td style="width: 10px"><img id="img-E34E0R0D1-E25E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>20</td>
+                  <td>Adjacent elements must be separated by a blank line.</td>
+                </tr>
+                <tr id="E34E0R0D1-E25E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeSeparatedByBlankLine</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1516</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.LayoutRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.AppSetting.TemporalChekWebPayEnvironment</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E34E0R0D1-E24E0R0D1', 'img-E34E0R0D1-E24E0R0D1')">
+                  <td style="width: 10px"><img id="img-E34E0R0D1-E24E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>14</td>
+                  <td>namespace names begin with an upper-case letter: tSys.</td>
+                </tr>
+                <tr id="E34E0R0D1-E24E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementMustBeginWithUpperCaseLetter</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1300</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.NamingRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr class="clickablerow" onclick="toggle('E23E0R0D1', 'img-E23E0R0D1')">
+          <td style="width: 10px"><img id="img-E23E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+          </td>
+          <td style="width: 16px"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJPSURBVDjLpZPLS5RhFMYfv9QJlelTQZwRb2OKlKuINuHGLlBEBEOLxAu46oL0F0QQFdWizUCrWnjBaDHgThCMoiKkhUONTqmjmDp2GZ0UnWbmfc/ztrC+GbM2dXbv4ZzfeQ7vefKMMfifyP89IbevNNCYdkN2kawkCZKfSPZTOGTf6Y/m1uflKlC3LvsNTWArr9BT2LAf+W73dn5jHclIBFZyfYWU3or7T4K7AJmbl/yG7EtX1BQXNTVCYgtgbAEAYHlqYHlrsTEVQWr63RZFuqsfDAcdQPrGRR/JF5nKGm9xUxMyr0YBAEXXHgIANq/3ADQobD2J9fAkNiMTMSFb9z8ambMAQER3JC1XttkYGGZXoyZEGyTHRuBuPgBTUu7VSnUAgAUAWutOV2MjZGkehgYUA6O5A0AlkAyRnotiX3MLlFKduYCqAtuGXpyH0XQmOj+TIURt51OzURTYZdBKV2UBSsOIcRp/TVTT4ewK6idECAihtUKOArWcjq/B8tQ6UkUR31+OYXP4sTOdisivrkMyHodWejlXwcC38Fvs8dY5xaIId89VlJy7ACpCNCFCuOp8+BJ6A631gANQSg1mVmOxxGQYRW2nHMha4B5WA3chsv22T5/B13AIicWZmNZ6cMchTXUe81Okzz54pLi0uQWp+TmkZqMwxsBV74Or3od4OISPr0e3SHa3PX0f3HXKofNH/UIG9pZ5PeUth+CyS2EMkEqs4fPEOBJLsyske48/+xD8oxcAYPzs4QaS7RR2kbLTTOTQieczfzfTv8QPldGvTGoF6/8AAAAASUVORK5CYII=" alt="error.png">
+          </td>
+          <td>C:\Workspaces\Development_Phase1\MAIN\Source\Diagnostics.ReportingWeb\Diagnostics.ReportingWeb.ApplicationServices\Diagnostics.ReportingWeb.ApplicationServices.Common\Configuration\ReportingServiceConfiguration.cs</td>
+          <td>8</td>
+        </tr>
+        <tr id="E23E0R0D1" class="errorlist" style="display: none">
+          <td></td>
+          <td colspan="6">
+            <table cellpadding="2" cellspacing="0" width="100%" class="inner-results">
+              <thead>
+                <tr class="inner-header">
+                  <th scope="col"></th>
+                  <th scope="col">Line</th>
+                  <th scope="col">Violation Message</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="clickablerow" onclick="toggle('E23E0R0D1-E23E0R0D1', 'img-E23E0R0D1-E23E0R0D1')">
+                  <td style="width: 10px"><img id="img-E23E0R0D1-E23E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>17</td>
+                  <td>The class must have a documentation header.</td>
+                </tr>
+                <tr id="E23E0R0D1-E23E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ReportingServiceConfiguration</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E23E0R0D1-E22E0R0D1', 'img-E23E0R0D1-E22E0R0D1')">
+                  <td style="width: 10px"><img id="img-E23E0R0D1-E22E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>19</td>
+                  <td>The field must have a documentation header.</td>
+                </tr>
+                <tr id="E23E0R0D1-E22E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ReportingServiceConfiguration.appSettings</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E23E0R0D1-E21E0R0D1', 'img-E23E0R0D1-E21E0R0D1')">
+                  <td style="width: 10px"><img id="img-E23E0R0D1-E21E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>21</td>
+                  <td>The field must have a documentation header.</td>
+                </tr>
+                <tr id="E23E0R0D1-E21E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ReportingServiceConfiguration.protectedAppSettings</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E23E0R0D1-E20E0R0D1', 'img-E23E0R0D1-E20E0R0D1')">
+                  <td style="width: 10px"><img id="img-E23E0R0D1-E20E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>23</td>
+                  <td>The field must have a documentation header.</td>
+                </tr>
+                <tr id="E23E0R0D1-E20E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ReportingServiceConfiguration.syncRoot</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E23E0R0D1-E19E0R0D1', 'img-E23E0R0D1-E19E0R0D1')">
+                  <td style="width: 10px"><img id="img-E23E0R0D1-E19E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>25</td>
+                  <td>The constructor must have a documentation header.</td>
+                </tr>
+                <tr id="E23E0R0D1-E19E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ReportingServiceConfiguration.ReportingServiceConfiguration</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E23E0R0D1-E18E0R0D1', 'img-E23E0R0D1-E18E0R0D1')">
+                  <td style="width: 10px"><img id="img-E23E0R0D1-E18E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>29</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E23E0R0D1-E18E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ReportingServiceConfiguration.AppSettings</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E23E0R0D1-E17E0R0D1', 'img-E23E0R0D1-E17E0R0D1')">
+                  <td style="width: 10px"><img id="img-E23E0R0D1-E17E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>49</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E23E0R0D1-E17E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ReportingServiceConfiguration.ProtectedAppSetting</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E23E0R0D1-E16E0R0D1', 'img-E23E0R0D1-E16E0R0D1')">
+                  <td style="width: 10px"><img id="img-E23E0R0D1-E16E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>15</td>
+                  <td>namespace names begin with an upper-case letter: Reporting.</td>
+                </tr>
+                <tr id="E23E0R0D1-E16E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementMustBeginWithUpperCaseLetter</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1300</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.NamingRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr class="clickablerow" onclick="toggle('E15E0R0D1', 'img-E15E0R0D1')">
+          <td style="width: 10px"><img id="img-E15E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+          </td>
+          <td style="width: 16px"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJPSURBVDjLpZPLS5RhFMYfv9QJlelTQZwRb2OKlKuINuHGLlBEBEOLxAu46oL0F0QQFdWizUCrWnjBaDHgThCMoiKkhUONTqmjmDp2GZ0UnWbmfc/ztrC+GbM2dXbv4ZzfeQ7vefKMMfifyP89IbevNNCYdkN2kawkCZKfSPZTOGTf6Y/m1uflKlC3LvsNTWArr9BT2LAf+W73dn5jHclIBFZyfYWU3or7T4K7AJmbl/yG7EtX1BQXNTVCYgtgbAEAYHlqYHlrsTEVQWr63RZFuqsfDAcdQPrGRR/JF5nKGm9xUxMyr0YBAEXXHgIANq/3ADQobD2J9fAkNiMTMSFb9z8ambMAQER3JC1XttkYGGZXoyZEGyTHRuBuPgBTUu7VSnUAgAUAWutOV2MjZGkehgYUA6O5A0AlkAyRnotiX3MLlFKduYCqAtuGXpyH0XQmOj+TIURt51OzURTYZdBKV2UBSsOIcRp/TVTT4ewK6idECAihtUKOArWcjq/B8tQ6UkUR31+OYXP4sTOdisivrkMyHodWejlXwcC38Fvs8dY5xaIId89VlJy7ACpCNCFCuOp8+BJ6A631gANQSg1mVmOxxGQYRW2nHMha4B5WA3chsv22T5/B13AIicWZmNZ6cMchTXUe81Okzz54pLi0uQWp+TmkZqMwxsBV74Or3od4OISPr0e3SHa3PX0f3HXKofNH/UIG9pZ5PeUth+CyS2EMkEqs4fPEOBJLsyske48/+xD8oxcAYPzs4QaS7RR2kbLTTOTQieczfzfTv8QPldGvTGoF6/8AAAAASUVORK5CYII=" alt="error.png">
+          </td>
+          <td>C:\Workspaces\Development_Phase1\MAIN\Source\Diagnostics.ReportingWeb\Diagnostics.ReportingWeb.ApplicationServices\Diagnostics.ReportingWeb.ApplicationServices.Common\Configuration\ProtectedAppSetting.cs</td>
+          <td>16</td>
+        </tr>
+        <tr id="E15E0R0D1" class="errorlist" style="display: none">
+          <td></td>
+          <td colspan="6">
+            <table cellpadding="2" cellspacing="0" width="100%" class="inner-results">
+              <thead>
+                <tr class="inner-header">
+                  <th scope="col"></th>
+                  <th scope="col">Line</th>
+                  <th scope="col">Violation Message</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E15E0R0D1', 'img-E15E0R0D1-E15E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E15E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>17</td>
+                  <td>The class must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E15E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E14E0R0D1', 'img-E15E0R0D1-E14E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E14E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>21</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E14E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.TemporalChekProIdUserName</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E13E0R0D1', 'img-E15E0R0D1-E13E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E13E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>23</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E13E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.TemporalChekProIdPwd</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E12E0R0D1', 'img-E15E0R0D1-E12E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E12E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>25</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E12E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.TemporalChekProIdProviderId</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E11E0R0D1', 'img-E15E0R0D1-E11E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E11E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>31</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E11E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.TemporalChekOrdersUserName</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E10E0R0D1', 'img-E15E0R0D1-E10E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E10E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>33</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E10E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.TemporalChekOrdersPwd</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E9E0R0D1', 'img-E15E0R0D1-E9E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E9E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>35</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E9E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.TemporalChekOrdersProviderId</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E8E0R0D1', 'img-E15E0R0D1-E8E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E8E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>37</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E8E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.TemporalChekOrdersMaxCount</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E7E0R0D1', 'img-E15E0R0D1-E7E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E7E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>39</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E7E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.TemporalChekOrdersIncludeImages</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E6E0R0D1', 'img-E15E0R0D1-E6E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E6E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>45</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E6E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.TemporalChekWebPayBusinessUnitCode</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E5E0R0D1', 'img-E15E0R0D1-E5E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E5E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>51</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E5E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.GeoCodeAppId</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E4E0R0D1', 'img-E15E0R0D1-E4E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E4E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>53</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E4E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.GeoCodeAppKey</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E3E0R0D1', 'img-E15E0R0D1-E3E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E3E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>59</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E3E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.PitneyBowesUsername</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E2E0R0D1', 'img-E15E0R0D1-E2E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E2E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>61</td>
+                  <td>The property must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E2E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.PitneyBowesPwd</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E1E0R0D1', 'img-E15E0R0D1-E1E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E1E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>65</td>
+                  <td>The method must have a documentation header.</td>
+                </tr>
+                <tr id="E15E0R0D1-E1E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementsMustBeDocumented</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1600</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.DocumentationRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration.ProtectedAppSetting.OnInitialize</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="clickablerow" onclick="toggle('E15E0R0D1-E0E0R0D1', 'img-E15E0R0D1-E0E0R0D1')">
+                  <td style="width: 10px"><img id="img-E15E0R0D1-E0E0R0D1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAPCAMAAADnP957AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAGUExURWlpaf///1gubPoAAAACdFJOU/8A5bcwSgAAAFZJREFUeNpiYEQCAAHEgMwBCCAQhwEGAAKIAUmWASCAYBwwBgggFA5AAEEYEA0MAAGEIgMQQCgcgABCMQ0ggFDsAQggFBcABBAKByCAUDgAAYTCAQgwADPcAIy9WFq3AAAAAElFTkSuQmCC" alt="plus.png">
+                  </td>
+                  <td>15</td>
+                  <td>namespace names begin with an upper-case letter: Reporting.</td>
+                </tr>
+                <tr id="E15E0R0D1-E0E0R0D1" style="display: none">
+                  <td></td>
+                  <td colspan="5">
+                    <div class="legend">
+                      <div>
+                        <table cellpadding="2" cellspacing="0" width="100%" class="inner-rule-description">
+                          <tr>
+                            <td><b>Rule:</b>
+                            </td>
+                            <td>ElementMustBeginWithUpperCaseLetter</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Id:</b>
+                            </td>
+                            <td>SA1300</td>
+                          </tr>
+                          <tr>
+                            <td><b>Rule Namespace:</b>
+                            </td>
+                            <td>StyleCop.CSharp.NamingRules</td>
+                          </tr>
+                          <tr>
+                            <td><b>Section:</b>
+                            </td>
+                            <td>Demo.Diagnostics.ReportingWeb.ApplicationServices.Common.Configuration</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
