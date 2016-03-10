@@ -1,4 +1,4 @@
-﻿REM @echo off
+﻿@echo off
 
 :: The batch file can be used to trigger the report generation of StylecopViolation xml report. 
 :: Location of stylecop generation report \obj\$configuration e.g. \obj\Debug, \obj\Release
@@ -9,13 +9,13 @@ ECHO ----
 ECHO  
 ECHO Generating stylecop results Report..........
 
-CALL StylecopReportGen "C:\Workspaces\..\<YourSolutionFile>.sln" "Debug"
+CALL StylecopReportGen "C:\Workspace_tfs\<YourSolution>.sln" "Release"
 
-IF %ERRORLEVEL% NEQ 0  GOTO HOLD_WINDOW
+::IF %ERRORLEVEL% NEQ 0  GOTO HOLD_WINDOW
 
 :: START iexplore file://%CD%\StylecopViolations.html
+:: Pause
+:: EXIT
 
-EXIT
-
-:HOLD_WINDOW
+::HOLD_WINDOW
 PAUSE

@@ -6,6 +6,8 @@ using System.Xml;
 using XmlPrime;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Threading;
 
 namespace StylecopReportGen
 {
@@ -164,6 +166,8 @@ namespace StylecopReportGen
             WriteLineColored("Generating report...", ConsoleColor.DarkYellow);
 
             var outputPath = BuildOutputPath();
+            var outputSrcViolation = Path.Combine(outputPath, "src");
+            CreateDir(outputSrcViolation);
 
             // Notice execution time
             Stopwatch stopwatch = new Stopwatch();
@@ -171,13 +175,16 @@ namespace StylecopReportGen
 
             string lastErrorMessage = "";
 
-            var cancellationToken = new System.Threading.CancellationToken();
-
             // Process files in parallel mode
             Parallel.ForEach<ProjectReport>(reports, (rpt, state) =>
             {
                 try
                 {
+                    // collect each project's stylecop violations for merging
+                    File.Copy(
+                        rpt.StyleCopReportFile, 
+                        string.Concat(outputSrcViolation, string.Format("\\{0}_{1}.xml", "StylecopViolations",Guid.NewGuid())));
+
                     PerformTransformation(rpt.StyleCopReportFile, stylecopXslt, string.Concat(Path.Combine(outputPath, rpt.ProjectName), ".html"));
                 }
                 catch (Exception e)
@@ -187,6 +194,17 @@ namespace StylecopReportGen
                     state.Break();
                 }
             });
+
+            // Merge stylecop results files for summary generation
+            var mergedFile = StyleCopResultsFileMerge.MergeAllFiles(outputSrcViolation);
+            var styleCopSummaryXslt = "StyleCopViolationsSummary.xslt";
+            if (File.Exists(styleCopSummaryXslt))
+            {
+                WriteLineColored("Generating report summary...", ConsoleColor.DarkYellow);
+                PerformTransformation(mergedFile, styleCopSummaryXslt, string.Concat(Path.Combine(outputPath, "StyleCopResults_Summarized"), ".html"));
+                File.Delete(mergedFile);
+                Directory.Delete(Path.GetDirectoryName(mergedFile));
+            }
 
             stopwatch.Stop();
 
@@ -213,14 +231,20 @@ namespace StylecopReportGen
         {
             string outDirName = string.Format("ReportGen_{0}", DateTime.Now.ToString("MM_dd_yyyy_HH-mm-ss"));
             var outDirPath = Path.Combine(Environment.CurrentDirectory, outDirName);
-            if (Directory.Exists(outDirPath))
-            {
-                Directory.Delete(outDirPath);
-            }
 
-            Directory.CreateDirectory(outDirPath);
+            CreateDir(outDirPath);
 
             return outDirPath;
+        }
+
+        private static void CreateDir(string path)
+        {
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path);
+            }
+
+            Directory.CreateDirectory(path);
         }
 
         private static void WriteColored(string message, ConsoleColor color)
